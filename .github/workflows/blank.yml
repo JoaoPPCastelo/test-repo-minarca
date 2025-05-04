@@ -36,3 +36,7 @@ jobs:
           sudo apt install python2 librsync-dev libacl1-dev git xvfb xauth cron zenity kdialog -y
           python2 --version
           pip install tox
+          git clone https://gitlab.com/ikus-soft/minarca.git && \
+          cd minarca && \
+          sed -i "s/architecture='amd64'/architecture='arm64'/g" packaging/minarca.spec && \
+          tox -e flake8,black,isort,py3-linux
