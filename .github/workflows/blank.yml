@@ -40,6 +40,7 @@ jobs:
       - name: Clone minarca client
         run: |
           git clone https://gitlab.com/ikus-soft/minarca.git
+          cd minarca
           git checkout ${{ env.RELEASE_TAG }}
 
       - name: Patch minarca client for arm64
