@@ -25,19 +25,25 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: python --version
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # 
+      - name: Install dependencies
         run: |
           sudo apt update
           sudo apt install python2 librsync-dev libacl1-dev git xvfb xauth cron zenity kdialog -y
-          python2 --version
-          pip install tox
-          git clone https://gitlab.com/ikus-soft/minarca.git && \
+
+      - name: Install tox
+        run: pip install tox
+
+      - name: Clone minarca client
+        run: git clone https://gitlab.com/ikus-soft/minarca.git
+
+      - name: Patch minarca client for arm64
+        run: |
           cd minarca && \
           sed -i "s/architecture='amd64'/architecture='arm64'/g" packaging/minarca.spec && \
+
+      - name: Build and run tests
+        run: |
+          env
           unset DBUS_SESSION_BUS_ADDRESS
           tox -e flake8,black,isort,py3-linux
