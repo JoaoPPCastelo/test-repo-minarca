@@ -45,12 +45,12 @@ jobs:
       - name: Check IS_LINUX and NO_DBUS
         run: |
           python -c "
-  import os, sys
-  IS_LINUX = sys.platform in ['linux', 'linux2']
-  NO_DBUS = not os.environ.get('DBUS_SESSION_BUS_ADDRESS', False)
-  print(f'IS_LINUX = {IS_LINUX}')
-  print(f'DBUS_SESSION_BUS_ADDRESS = {os.environ.get("DBUS_SESSION_BUS_ADDRESS")}')
-  print(f'NO_DBUS = {NO_DBUS}')
+import os, sys
+IS_LINUX = sys.platform in ['linux', 'linux2']
+NO_DBUS = not os.environ.get('DBUS_SESSION_BUS_ADDRESS', False)
+print(f'IS_LINUX = {IS_LINUX}')
+print(f'DBUS_SESSION_BUS_ADDRESS = {os.environ.get("DBUS_SESSION_BUS_ADDRESS")}')
+print(f'NO_DBUS = {NO_DBUS}')
 "
 
       - name: Build and run tests
