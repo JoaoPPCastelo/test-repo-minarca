@@ -33,7 +33,8 @@ jobs:
       - name: Run a multi-line script
         run: |
           sudo apt update
-          sudo apt install python2 librsync-dev libacl1-dev notification-daemon git xvfb xauth cron zenity kdialog -y
+          unset DBUS_SESSION_BUS_ADDRESS
+          sudo apt install python2 librsync-dev libacl1-dev git xvfb xauth cron zenity kdialog -y
           python2 --version
           ls -la /usr/lib/notification-daemon/notification-daemon
           pip install tox
