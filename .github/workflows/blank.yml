@@ -33,8 +33,9 @@ jobs:
       - name: Run a multi-line script
         run: |
           sudo apt update
-          sudo apt install python2 librsync-dev libacl1-dev libnotify-cil-dev notification-daemon gnome-shell git xvfb xauth cron zenity kdialog -y
+          sudo apt install python2 librsync-dev libacl1-dev notification-daemon git xvfb xauth cron zenity kdialog -y
           python2 --version
+          ls -la /usr/lib/notification-daemon/notification-daemon
           pip install tox
           git clone https://gitlab.com/ikus-soft/minarca.git && \
           cd minarca && \
