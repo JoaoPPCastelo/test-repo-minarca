@@ -41,6 +41,7 @@ jobs:
         run: |
           cd minarca
           sed -i "s/architecture='amd64'/architecture='arm64'/g" packaging/minarca.spec
+          sed -i '/^\s*import os\s*$/d' minarca_client/core/notification/tests/test_notification.py
           sed -i "s|NO_DBUS = not os.environ.get('DBUS_SESSION_BUS_ADDRESS', False)|NO_DBUS = True|" minarca_client/core/notification/tests/test_notification.py
 
       - name: Check IS_LINUX and NO_DBUS
