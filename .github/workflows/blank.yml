@@ -39,5 +39,5 @@ jobs:
           git clone https://gitlab.com/ikus-soft/minarca.git && \
           cd minarca && \
           sed -i "s/architecture='amd64'/architecture='arm64'/g" packaging/minarca.spec && \
-          export DBUS_SESSION_BUS_ADDRESS=""
+          unset DBUS_SESSION_BUS_ADDRESS
           tox -e flake8,black,isort,py3-linux
