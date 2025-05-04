@@ -46,7 +46,7 @@ jobs:
         run: |
           python -c "
           import os, sys
-          IS_LINUX = sys.platform in ['linux', 'linux2']
+          IS_LINUX = sys.platform
           NO_DBUS = not os.environ.get('DBUS_SESSION_BUS_ADDRESS', False)
           print(f'IS_LINUX = {IS_LINUX}')
           print(f'NO_DBUS = {NO_DBUS}')
@@ -57,4 +57,4 @@ jobs:
           env
           cd minarca
           tox -e flake8,black,isort
-          unset DBUS_SESSION_BUS_ADDRESS && tox -e py3-linux
+          tox -e py3-linux
