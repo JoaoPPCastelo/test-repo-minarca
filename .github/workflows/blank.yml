@@ -39,8 +39,8 @@ jobs:
 
       - name: Patch minarca client for arm64
         run: |
-          cd minarca && \
-          sed -i "s/architecture='amd64'/architecture='arm64'/g" packaging/minarca.spec && \
+          cd minarca
+          sed -i "s/architecture='amd64'/architecture='arm64'/g" packaging/minarca.spec
 
       - name: Build and run tests
         run: |
