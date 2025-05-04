@@ -45,6 +45,6 @@ jobs:
       - name: Build and run tests
         run: |
           env
-          export DBUS_SESSION_BUS_ADDRESS="True"
           cd minarca
-          tox -e flake8,black,isort,py3-linux
+          tox -e flake8,black,isort
+          DBUS_SESSION_BUS_ADDRESS="True" tox -e py3-linux
