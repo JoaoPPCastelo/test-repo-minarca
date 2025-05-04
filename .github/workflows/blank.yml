@@ -55,7 +55,7 @@ jobs:
 
       - name: Build and run tests
         run: |
-          env
           cd minarca
+          cat minarca_client/core/notification/tests/test_notification.py
           tox -e flake8,black,isort
           tox -e py3-linux
