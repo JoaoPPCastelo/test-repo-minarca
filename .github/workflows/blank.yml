@@ -13,6 +13,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  RELEASE_TAG: 6.1.0a3
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -35,7 +38,9 @@ jobs:
         run: pip install tox
 
       - name: Clone minarca client
-        run: git clone https://gitlab.com/ikus-soft/minarca.git
+        run: |
+          git clone https://gitlab.com/ikus-soft/minarca.git
+          git checkout ${{ env.RELEASE_TAG }}
 
       - name: Patch minarca client for arm64
         run: |
@@ -54,3 +59,14 @@ jobs:
         run: |
           cd minarca
           tox -e pyinstaller-linux
+          mv dist/minarca-client_*_arm64.deb dist/minarca-client_${{ env.RELEASE_TAG }}_arm64.deb
+
+      - name: Upload to GitHub Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./minarca/dist/minarca-client_${{ env.RELEASE_TAG }}_arm64.deb
+          asset_name: minarca-client_${{ env.RELEASE_TAG }}_arm64.deb
+          asset_content_type: application/vnd.debian.binary-package
