@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/JoaoPPCastelo/test-repo-minarca/compare/v1.1.1...v1.1.2) (2025-05-10)
+
+
+### Bug Fixes
+
+* fix path for artifact ([5144ddf](https://github.com/JoaoPPCastelo/test-repo-minarca/commit/5144ddfa5d27f7bd88ea7b7c702b7ff122a743d8))
+
 ## [1.1.1](https://github.com/JoaoPPCastelo/test-repo-minarca/compare/v1.1.0...v1.1.1) (2025-05-10)
 
 
