@@ -18,7 +18,7 @@
       {
         "assets": [
           "CHANGELOG.md",
-          "dist/minarca-client_*_arm64.deb"
+          "minarca/dist/minarca-client_*_arm64.deb"
         ]
       }
     ],
