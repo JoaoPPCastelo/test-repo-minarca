@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/JoaoPPCastelo/test-repo-minarca/compare/v1.1.0...v1.1.1) (2025-05-10)
+
+
+### Bug Fixes
+
+* Fix missing artifacts on release zip ([3c5f1b7](https://github.com/JoaoPPCastelo/test-repo-minarca/commit/3c5f1b710ab4f39c05b2d009957b911b26631f7e))
+
 # [1.1.0](https://github.com/JoaoPPCastelo/test-repo-minarca/compare/v1.0.0...v1.1.0) (2025-05-10)
 
 
