@@ -1,0 +1,59 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Minarca-client
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  RELEASE_TAG: 6.1.0a3
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-22.04-arm
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # 
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install python2 librsync-dev libacl1-dev git xvfb xauth cron zenity kdialog -y
+
+      - name: Install tox
+        run: pip install tox
+
+      - name: Clone minarca client
+        run: |
+          git clone https://gitlab.com/ikus-soft/minarca.git
+          cd minarca
+          git checkout ${{ env.RELEASE_TAG }}
+
+      - name: Patch minarca client for arm64
+        run: |
+          cd minarca
+          sed -i "s/architecture='amd64'/architecture='arm64'/g" packaging/minarca.spec
+          sed -i '/^\s*import os\s*$/d' minarca_client/core/notification/tests/test_notification.py
+          sed -i "s|NO_DBUS = not os.environ.get('DBUS_SESSION_BUS_ADDRESS', False)|NO_DBUS = True|" minarca_client/core/notification/tests/test_notification.py
+
+      - name: Build and run tests
+        run: |
+          cd minarca
+          tox -e flake8,black,isort
+          tox -e py3-linux
+        
+      
