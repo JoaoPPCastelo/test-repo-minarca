@@ -81,7 +81,7 @@ RUN git clone https://gitlab.com/ikus-soft/rdiff-backup-build.git && \
 FROM --platform=linux/arm64 python:3.12-bullseye AS builder-minarca-server
 
 ENV TZ=UTC
-ENV MINACRCA_SERVER_VERSION=6.1.0a3
+ENV MINACRCA_SERVER_VERSION=6.1.0b5
 
 RUN apt update && \
     apt -y --no-install-recommends install python3-dev python3-pip python3-setuptools && \
